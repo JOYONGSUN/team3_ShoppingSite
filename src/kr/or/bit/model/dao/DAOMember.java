@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import kr.or.bit.model.DBManager;
 import kr.or.bit.model.dto.DTOMember;
+import kr.or.bit.utils.c_SHAUtil;
+import kr.or.bit.utils.c_Salt;
 
 public class DAOMember {
 	private static DBManager instance = DBManager.getInstance();
@@ -42,6 +44,7 @@ public class DAOMember {
 	}
 	
 	public static int insertMember(DTOMember member) {
+	
 		int resultRow = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -53,8 +56,7 @@ public class DAOMember {
 			pstmt.setString(3, member.getName());
 			pstmt.setString(4, member.getHp());
 			pstmt.setString(5, member.getCardNum());
-			pstmt.setString(6, member.getAddress());
-			
+			pstmt.setString(6, member.getAddress());			
 			resultRow = pstmt.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -142,10 +144,14 @@ public class DAOMember {
 		String id = rs.getString("ID").trim();
 		String pwd = rs.getString("PWD").trim();
 		String name = rs.getString("NAME").trim();
-		String hp = rs.getString("HP").trim();
-		String cardNum = rs.getString("CARD_NUM").trim();
-		String address = rs.getString("ADDRESS").trim();
+		String hp = "";
+		String cardNum = "";
+		String address = "";
 		String selFlag = rs.getString("SEL_FLAG").trim();
+		
+		if(rs.getString("HP") != null) hp = rs.getString("HP").trim();
+		if(rs.getString("CARD_NUM") != null) cardNum = rs.getString("CARD_NUM").trim();
+		if(rs.getString("ADDRESS") != null) address = rs.getString("ADDRESS").trim();
 		
 		DTOMember member = new DTOMember(id, pwd, name, hp, cardNum, address, selFlag);
 		return member;

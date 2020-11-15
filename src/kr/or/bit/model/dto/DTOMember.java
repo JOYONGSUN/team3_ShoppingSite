@@ -93,4 +93,11 @@ public class DTOMember {
 	public void setSelFlag(String selFlag) {
 		this.selFlag = selFlag;
 	}
+
+	@Override
+	public String toString() {
+		return "DTOMember [id=" + id + ", pwd=" + pwd + ", name=" + name + ", hp=" + hp + ", cardNum=" + cardNum
+				+ ", address=" + address + ", selFlag=" + selFlag + "]";
+	}
+	
 }

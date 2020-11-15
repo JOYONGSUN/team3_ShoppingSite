@@ -16,8 +16,8 @@ public class CategoryPageService implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) {
 		ActionForward forward = new ActionForward();
 		
-//		String ctg = request.getParameter("ctg");
-		int categoryNum = 15;
+		int categoryNum = Integer.parseInt(request.getParameter("categoryNum"));
+//		int categoryNum = 15;
 		List<DTOSalePost> salePostList = DAOSalePost.getSalePostListByCategory(categoryNum);
 		request.setAttribute("salePostList", salePostList);
 		
